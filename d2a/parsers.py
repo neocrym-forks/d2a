@@ -73,6 +73,6 @@ def parse_model(model, callback=parse_field):
 def parse_models(module):
     models = {}
     for name, model in [(name, getattr(module, name)) for name in dir(module)]:
-        if isinstance(model, ModelBase) and not model._meta.abstract:
+        if isinstance(model, ModelBase) and hasattr(model, "_meta") and not model._meta.abstract:
             models[name] = model
     return models
